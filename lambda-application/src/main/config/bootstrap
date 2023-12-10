@@ -1,3 +1,12 @@
 #!/usr/bin/env bash
 
+echo "LAMBDA_TASK_ROOT: $LAMBDA_TASK_ROOT"
+echo "_HANDLER: $_HANDLER"
+
+ls $LAMBDA_TASK_ROOT
+#mkdir /tmp/.aws-lambda-runtime-interface-client
+#cp -v $LAMBDA_TASK_ROOT/*.so /tmp/.aws-lambda-runtime-interface-client/
+echo "/tmp/.aws-lambda-runtime-interface-client/ content:"
+ls /tmp/.aws-lambda-runtime-interface-client/
+
 ./product-binary $_HANDLER

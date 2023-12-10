@@ -20,4 +20,20 @@
             <fileMode>777</fileMode>
         </file>
     </files>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>${file.separator}</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <scope>runtime</scope>
+            <includes>
+                <include>com.amazonaws:aws-lambda-java-runtime-interface-client</include>
+            </includes>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <includes>
+                    <include>*.so</include>
+                </includes>
+            </unpackOptions>
+        </dependencySet>
+    </dependencySets>
 </assembly>
