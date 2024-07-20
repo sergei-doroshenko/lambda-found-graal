@@ -5,5 +5,5 @@ import { LambdaGraalvmStack } from "../lib/lambda-graalvm-stack";
 
 const app = new App();
 new LambdaGraalvmStack(app, "LambdaGraalVMStack", {
-    env: { account: process.env.PERSONAL_AWS_ACCOUNT, region: "eu-west-1" }
+    env: { account: process.env.PERSONAL_AWS_ACCOUNT, region: "us-east-1" }
 });

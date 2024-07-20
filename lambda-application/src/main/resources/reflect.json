@@ -1,0 +1,9 @@
+[
+  {
+    "name": "org.sdoroshenko.lambda.application.S3GraalVM",
+    "allDeclaredConstructors": true,
+    "allPublicConstructors": true,
+    "allDeclaredMethods": true,
+    "allPublicMethods": true
+  }
+]
