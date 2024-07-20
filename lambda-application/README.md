@@ -45,12 +45,12 @@ Dockerfile [git repo](https://github.com/marksailes/al2-graalvm)
 Run:
 
 ```shell
-docker run --rm --name lambda-build \
+docker run --name lambda-build \
 -v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-input:delegated" \
 -v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-output:delegated" \
 -v "/Users/sddorosh/.m2/:/root/.m2/:delegated" \
 -w "/asset-input" \
--it marksailes/al2-graalvm -c "mvn clean install -P native-image  && cp /asset-input/target/function.zip /asset-output/"
+-it marksailes/al2-graalvm
 ```
 
 Explanation:
@@ -60,6 +60,15 @@ Mount: -v .:/content -w /content \
 
 Mount assets input:
 -v .:/project \
+
+```shell
+docker run --rm --name lambda-build \
+-v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-input:delegated" \
+-v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-output:delegated" \
+-v "/Users/sddorosh/.m2/:/root/.m2/:delegated" \
+-w "/asset-input" \
+-it marksailes/al2-graalvm -c "mvn clean install -Pnative  && cp /asset-input/target/function.zip /asset-output/"
+```
 
 ## Troubleshooting
 
