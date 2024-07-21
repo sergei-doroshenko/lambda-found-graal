@@ -37,7 +37,7 @@ targetCompatibility = 11
 tasks.register('buildGraalVMImage') {
     inputs.files("${project.projectDir}/src/main", configurations.compileClasspath)
     outputs.upToDateWhen { file("${layout.buildDirectory}/graalvm/server").exists() }
-    outputs.file file("${layout.buildDirectory}/graalvm/server")
+    outputs.file file("${layout.buildDirectory.asFile}/graalvm/server")
 
     doLast {
         exec {
@@ -56,7 +56,7 @@ tasks.register('buildZip', Zip) {
     from "${project.projectDir}"
     include 'server', 'bootstrap'
     archiveFileName = 'distributive.zip'
-    destinationDirectory = layout.buildDirectory
+    destinationDirectory = file('build')
 
     dependsOn('deleteDistributive')
 }
