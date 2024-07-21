@@ -18,6 +18,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 curl -v -X POST -H 'Content-Type:application/json' -d '{"micronautPackage":"bom"}'  https://e8klpa8u7f.execute-api.eu-west-1.amazonaws.com/prod/test
 ```
 
+### Lambda test
+```shell
 aws lambda invoke --function-name GraalVMLambda outfile --region us-east-1
+```
 
-org.sdoroshenko.lambda.application.S3GraalVM

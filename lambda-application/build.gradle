@@ -34,26 +34,31 @@ jar {
 sourceCompatibility = 11
 targetCompatibility = 11
 
-task buildGraalVMImage {
+tasks.register('buildGraalVMImage') {
     inputs.files("${project.projectDir}/src/main", configurations.compileClasspath)
-    outputs.upToDateWhen {file("${buildDir}/graalvm/server").exists()}
-    outputs.file file("${buildDir}/graalvm/server")
+    outputs.upToDateWhen { file("${layout.buildDirectory}/graalvm/server").exists() }
+    outputs.file file("${layout.buildDirectory}/graalvm/server")
 
     doLast {
         exec {
-            commandLine "bash", "-c", "./build_graalvm.sh"
+            commandLine 'bash', '-c', './build_graalvm.sh'
         }
     }
 }
 
-task buildZip(type: Zip) {
-    from compileJava
-    from processResources
-//    into('lib') {
-//        from configurations.runtime
-//    }
-    archiveName 'distributive.zip'
-//    destinationDir(file('/dir1/dir2/dir3/'))
+tasks.register('deleteDistributive', Delete) {
+    print("Deleting previously created distributive...")
+    delete 'build/graalvm/distributive.zip'
+}
+
+tasks.register('buildZip', Zip) {
+    from "build/graalvm"
+    from "${project.projectDir}"
+    include 'server', 'bootstrap'
+    archiveFileName = 'distributive.zip'
+    destinationDirectory = layout.buildDirectory
+
+    dependsOn('deleteDistributive')
 }
 
 buildGraalVMImage.dependsOn shadowJar, test

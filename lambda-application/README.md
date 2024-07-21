@@ -32,47 +32,17 @@ The output should be:
 mvn clean install -P native-image
 ```
 
-## Build with Docker
+## Errors
 
-Docker Hub [link](https://hub.docker.com/r/marksailes/al2-graalvm)
+java.lang.IllegalArgumentException: Type com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent is instantiated reflectively but was never registered. Register the type by adding "unsafeAllocated" for the type in reflect-config.json.
 
-```shell
-docker pull marksailes/al2-graalvm
+Update `reflect.json`
+
+```json
+[
+  {
+    "name": "com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent",
+    "unsafeAllocated": true
+  }
+]
 ```
-
-Dockerfile [git repo](https://github.com/marksailes/al2-graalvm)
-
-Run:
-
-```shell
-docker run --name lambda-build \
--v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-input:delegated" \
--v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-output:delegated" \
--v "/Users/sddorosh/.m2/:/root/.m2/:delegated" \
--w "/asset-input" \
--it marksailes/al2-graalvm
-```
-
-Explanation:
-
-Mount: -v .:/content -w /content \
--v "/Users/sddorosh/.m2/:/root/.m2/:delegated" \
-
-Mount assets input:
--v .:/project \
-
-```shell
-docker run --rm --name lambda-build \
--v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-input:delegated" \
--v "/Users/sddorosh/Documents/Personal/projects/lambda-with-graalvm/lambda-application:/asset-output:delegated" \
--v "/Users/sddorosh/.m2/:/root/.m2/:delegated" \
--w "/asset-input" \
--it marksailes/al2-graalvm -c "mvn clean install -Pnative  && cp /asset-input/target/function.zip /asset-output/"
-```
-
-## Troubleshooting
-
-
-## Links
-
-* [Blog](https://www.graalvmonlambda.com/summary/how-it-works/)
